@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "ql-code"
+version = "0.1.0"
+description = "青龙脚本"
+authors = ["aiofy"]
+readme = "README.md"
+packages = [{include = "ql_code"}]
+
+[tool.poetry.dependencies]
+python = "~3.8"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
