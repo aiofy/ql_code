@@ -8,6 +8,9 @@ packages = [{include = "ql_code"}]
 
 [tool.poetry.dependencies]
 python = "~3.8"
+loguru = "^0.7.0"
+httpx = "^0.24.1"
+requests = "^2.31.0"
 
 
 [build-system]
