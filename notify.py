@@ -62,7 +62,7 @@ push_config = {
 
     'IGOT_PUSH_KEY': '',  # iGot 聚合推送的 IGOT_PUSH_KEY
 
-    'PUSH_KEY': 'SCT117618Tw9pzGrvxY3cJzSxjxAyxA52w',  # server 酱的 PUSH_KEY，兼容旧版与 Turbo 版
+    'PUSH_KEY': '',  # server 酱的 PUSH_KEY，兼容旧版与 Turbo 版
 
     'DEER_KEY': '',  # PushDeer 的 PUSHDEER_KEY
     'DEER_URL': '',  # PushDeer 的 PUSHDEER_URL

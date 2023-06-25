@@ -1,9 +1,14 @@
+import json
+import os
+
 import httpx
 from loguru import logger
 
 from notify import send
 
-refresh_token = "ff7fd57d0ff943b4b43c83b99ed78c6e"
+"""
+自行添加环境变量 ALI_PAN={"refresh_token": "ff7fd57d0ff943b4b43c83b99ed78c6e"}
+"""
 
 TITLE = "阿里云盘签到"
 
@@ -22,13 +27,14 @@ class AliPan(object):
         "Accept-Language": "zh-CN,zh-Hans;q=0.9",
     }
 
-    def __init__(self, refresh_token: str):
-        self.refresh_token = refresh_token
+    def __init__(self):
+        self.refresh_token = json.loads(os.getenv("ALI_PAN"))
 
     def verify_token(self, session: httpx.Client):
+        self.refresh_token.update({"grant_type": "refresh_token", "app_id": "pJZInNHN2dZWk8qg"})
         res = session.post(
             url="https://auth.aliyundrive.com/v2/account/token",
-            json={"grant_type": "refresh_token", "app_id": "pJZInNHN2dZWk8qg", "refresh_token": self.refresh_token}
+            json=self.refresh_token
         )
 
         logger.debug(res.text)
@@ -73,7 +79,7 @@ class AliPan(object):
         data = res.json()
 
         if data.get("success"):
-            self.sign_in_reward_message = f"奖励: {data.get('result').get('name')} "
+            self.sign_in_reward_message = f"奖励: {data.get('result').get('name')} {data.get('result').get('description')}"
             f"{data.get('result').get('description')}"
             f"{data.get('result').get('notice')}"
             logger.success(self.sign_in_reward_message)
@@ -105,5 +111,5 @@ class AliPan(object):
 
 
 if __name__ == '__main__':
-    ali_pan = AliPan(refresh_token)
+    ali_pan = AliPan()
     ali_pan.run()
