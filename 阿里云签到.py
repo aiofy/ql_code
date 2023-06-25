@@ -7,7 +7,8 @@ from loguru import logger
 from notify import send
 
 """
-自行添加环境变量 ALI_PAN={"refresh_token": "xxxxxxxxxxxxxxxxxxxxxxxx"}
+cron: 56 9 * * *
+description: 自行添加环境变量 ALI_PAN={"refresh_token": "xxxxxxxxxxxxxxxxxxxxxxxx"}
 """
 
 TITLE = "阿里云盘签到"
@@ -28,7 +29,7 @@ class AliPan(object):
     }
 
     def __init__(self):
-        self.refresh_token = json.loads(os.getenv("ALI_PAN"))
+        self.refresh_token = None
 
     def verify_token(self, session: httpx.Client):
         self.refresh_token.update({"grant_type": "refresh_token", "app_id": "pJZInNHN2dZWk8qg"})
@@ -96,6 +97,12 @@ class AliPan(object):
 
     def run(self):
         try:
+
+            if not os.getenv("ALI_PAN"):
+                raise ValueError(f"阿里云盘环境变量 ALI_PAN 不存在")
+
+            self.refresh_token = json.loads(os.getenv("ALI_PAN"))
+
             with httpx.Client(headers=self.headers) as session:
                 # 获取 token
                 self.verify_token(session)
@@ -103,11 +110,12 @@ class AliPan(object):
                 self.sign(session)
                 # 领取奖励
                 self.sign_in_reward(session)
+
         except Exception as e:
             logger.error(e.__str__())
-            send("签到异常", e.__str__())
+            send("阿里云盘-签到异常", e.__str__())
         else:
-            send("签到成功", self.seed_content())
+            send("阿里云盘-签到成功", self.seed_content())
 
 
 if __name__ == '__main__':
