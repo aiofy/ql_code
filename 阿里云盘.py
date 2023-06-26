@@ -8,7 +8,7 @@ from notify import send
 
 """
 cron: 56 9 * * *
-description: 自行添加环境变量 ALI_PAN={"refresh_token": "xxxxxxxxxxxxxxxxxxxxxxxx"}
+自行添加环境变量 ALI_PAN={"refresh_token": "xxxxxxxxxxxxxxxxxxxxxxxx"}
 """
 
 TITLE = "阿里云盘签到"
