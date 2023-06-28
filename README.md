@@ -8,4 +8,4 @@
 
 环境变量：PUPU_AUTH=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
-状态：正常
+状态：失效
