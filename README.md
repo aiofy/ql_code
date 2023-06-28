@@ -9,9 +9,3 @@
 环境变量：PUPU_AUTH=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 状态：失效
-
-## 度加
-
-环境变量：QL_BDUSS_BFESS=xxxxxx,xxxxxxx
-
-状态：正常
