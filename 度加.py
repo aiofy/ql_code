@@ -9,6 +9,9 @@ import os
 import httpx
 from loguru import logger
 
+from notify import send
+
+
 TITLE = "度加创作工具签到"
 
 
